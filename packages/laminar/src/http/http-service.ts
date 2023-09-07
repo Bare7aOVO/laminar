@@ -89,7 +89,7 @@ export function toRequestListener(resolver: IncommingMessageResolver): http.Requ
       const parsedHeaderValue = String(headerValue);
 
       if (parsedHeaderName === 'content-disposition' && parsedHeaderValue.startsWith('attachment; filename=')) {
-        serverResponse.setHeader(parsedHeaderName, [parsedHeaderValue]);
+        serverResponse.setHeader(parsedHeaderName, parsedHeaderValue);
         continue;
       }
 
