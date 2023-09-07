@@ -86,6 +86,7 @@ export function toRequestListener(resolver: IncommingMessageResolver): http.Requ
 
     let contentTypeValue = '';
     let dispositionValue = '';
+
     for (const [headerName, headerValue] of Object.entries(response.headers)) {
       const parsedHeaderName = String(headerName).toLowerCase();
       const parsedHeaderValue = String(headerValue);
