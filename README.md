@@ -1,8 +1,15 @@
+# :no_entry: DEPRECATED Laminar
+
+## Repository will be made private on 3 Jan 2024
+
+## Forked Version
+A forked version of this repository can still be found under [IvanK's GitHub page](https://github.com/ivank/laminar)
+
+---
+
 ![Laminar logo](docs/assets/laminar-logo.svg)
 
 [![Laminar](https://circleci.com/gh/ovotech/laminar.svg?style=svg)](https://circleci.com/gh/ovotech/laminar)
-
-# Laminar
 
 A library for building node services in TypeScript. Convert external interfaces into TypeScript types with a cli tool - so that http request / responses would be validated against the OpenApi schema **at compile time**. Supports kafka / schema registry too, for event driven requests.
 
