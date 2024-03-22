@@ -1,6 +1,6 @@
-import { toHttpRequest } from './request';
-import { HttpListener, IncommingMessageResolver } from './types';
-import { errorsMiddleware, HttpErrorHandler } from './middleware/errors.middleware';
+import { toHttpMalformedRequest, toHttpRequest } from './request';
+import { HttpContext, HttpListener, IncommingMessageResolver } from './types';
+import { defaultErrorHandler, errorsMiddleware, HttpErrorHandler } from './middleware/errors.middleware';
 import { responseParserMiddleware, ResponseParser } from './middleware/response-parser.middleware';
 import { bodyParserMiddleware, BodyParser } from './middleware/body-parser.middleware';
 import http from 'http';
@@ -67,7 +67,18 @@ export function toIncommingMessageResolver({
   const resolver = parseResponse(handleErrors(parseBody(listener)));
 
   return async function (incommingMessage) {
-    return resolver(toHttpRequest(incommingMessage));
+    try {
+      return resolver(toHttpRequest(incommingMessage));
+    } catch (error) {
+      const errorCtx: HttpContext = toHttpMalformedRequest(incommingMessage);
+      errorHandler = errorHandler || defaultErrorHandler;
+
+      const handler = await errorHandler({ ...errorCtx, error });
+
+      handler.body = JSON.stringify(handler.body);
+
+      return handler;
+    }
   };
 }
 

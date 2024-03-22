@@ -310,4 +310,24 @@ describe('Requests', () => {
       expect(listener).not.toHaveBeenCalled();
     });
   });
+
+  it('Should handle malformed header', async () => {
+    await run(app, async () => {
+      await expect(
+        api
+          .post('http://localhost:8051/post', 'test', {
+            headers: {
+              'Content-Type': 'application/json',
+              'x-forwarded-host': '',
+            },
+          })
+          .catch((err) => err.response),
+      ).resolves.toMatchObject({
+        status: 404,
+        data: {
+          message: 'Invalid host',
+        },
+      });
+    });
+  });
 });
