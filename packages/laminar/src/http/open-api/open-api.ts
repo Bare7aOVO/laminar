@@ -94,6 +94,7 @@ export async function openApi<TContext extends Empty>(config: OapiConfig<TContex
         error: new HttpError(500, {
           message: `Server response for "${ctx.method} ${ctx.url.pathname}" does not match OpenApi Schema`,
           errors: checkResponse.errors,
+          res, // debug 500 error (SCH-5763)
         }),
       });
     }
