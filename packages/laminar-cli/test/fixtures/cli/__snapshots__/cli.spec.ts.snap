@@ -23,19 +23,19 @@ exports[`Cli Should generate fixtures file 1`] = `
  * \`\`\`
  */
 export type accounts = Fixture<{
-    id: number;
-    customer_id: number;
-    state?: "Active" | "Pending" | "Dispute" | "Closed";
+    beneficiary_account_number?: string;
     beneficiary_name?: string;
     beneficiary_sort_code?: string;
-    beneficiary_account_number?: string;
+    created_at?: Date;
+    customer_id: number;
+    end_on?: Date;
+    id: number;
     payment_plan?: "BACs" | "Cheque" | "Internal Transfer";
     payment_suspended?: boolean;
-    created_at?: Date;
-    updated_at?: Date;
     source_system_id?: number;
     start_on?: Date;
-    end_on?: Date;
+    state?: "Active" | "Closed" | "Dispute" | "Pending";
+    updated_at?: Date;
 }>;
 
 /**
@@ -55,17 +55,17 @@ export type accounts = Fixture<{
  * \`\`\`
  */
 export type addresses = Fixture<{
-    id: number;
-    city?: string;
-    country: string;
-    postcode: string;
-    created_at?: Date;
-    updated_at?: Date;
-    county?: string;
     address_line_1?: string;
     address_line_2?: string;
     address_line_3?: string;
+    city?: string;
+    country: string;
+    county?: string;
+    created_at?: Date;
+    id: number;
+    postcode: string;
     source_system_id?: number;
+    updated_at?: Date;
 }>;
 
 /**
@@ -106,8 +106,8 @@ export type animals = Fixture<{
  * \`\`\`
  */
 export type comms = Fixture<{
-    id: number;
     comm_id: string;
+    id: number;
     status: string;
 }>;
 
@@ -128,16 +128,16 @@ export type comms = Fixture<{
  * \`\`\`
  */
 export type contacts = Fixture<{
-    id: number;
     address_id: number;
-    title?: "Mrs" | "Miss" | "Dr" | "Ms" | "Mr";
-    first_name: string;
-    last_name: string;
-    email?: string;
-    phone?: string;
     created_at?: Date;
-    updated_at?: Date;
+    email?: string;
+    first_name: string;
+    id: number;
+    last_name: string;
+    phone?: string;
     source_system_id?: number;
+    title?: "Dr" | "Miss" | "Mr" | "Mrs" | "Ms";
+    updated_at?: Date;
 }>;
 
 /**
@@ -157,21 +157,21 @@ export type contacts = Fixture<{
  * \`\`\`
  */
 export type contracts = Fixture<{
-    id: number;
-    scheme_type: "FIT" | "SEG";
-    scheme_account_reference: string;
-    confirmation_on?: Date;
-    terms_and_conditions_agreed: boolean;
-    created_at?: Date;
-    updated_at?: Date;
-    installation_id: number;
-    generation_tariff_id?: number;
-    export_tariff_id?: number;
-    source_system_id?: number;
-    export_percentage_split?: number;
-    generation_percentage_split?: number;
-    contact_id: number;
     account_id: number;
+    confirmation_on?: Date;
+    contact_id: number;
+    created_at?: Date;
+    export_percentage_split?: number;
+    export_tariff_id?: number;
+    generation_percentage_split?: number;
+    generation_tariff_id?: number;
+    id: number;
+    installation_id: number;
+    scheme_account_reference: string;
+    scheme_type: "FIT" | "SEG";
+    source_system_id?: number;
+    terms_and_conditions_agreed: boolean;
+    updated_at?: Date;
 }>;
 
 /**
@@ -191,20 +191,20 @@ export type contracts = Fixture<{
  * \`\`\`
  */
 export type customers = Fixture<{
-    id: number;
+    billing_address_id?: number;
+    company_name?: string;
+    company_reg_number?: string;
+    company_vat_number?: string;
+    created_at?: Date;
     customer_reference: string;
+    generator_id?: string;
+    id: number;
     orion_account_number?: string;
     primary_contact_id?: number;
     secondary_contact_id?: number;
-    tertiary_contact_id?: number;
-    company_reg_number?: string;
-    company_name?: string;
-    company_vat_number?: string;
-    created_at?: Date;
-    updated_at?: Date;
-    billing_address_id?: number;
     source_system_id?: number;
-    generator_id?: string;
+    tertiary_contact_id?: number;
+    updated_at?: Date;
 }>;
 
 /**
@@ -266,20 +266,20 @@ export type db_users2 = Fixture<{
  * \`\`\`
  */
 export type fixtures_meter_reads = Fixture<{
-    id: number;
-    meter_id: number;
-    date_on: Date;
-    value: number;
-    type: "Opening" | "Closing" | "Quarterly" | "Meter Verification";
-    reason?: string;
     created_at?: Date;
-    updated_at?: Date;
-    source_system_id?: number;
-    tolerance?: string;
-    is_accepted?: boolean;
+    date_on: Date;
     deleted_at?: Date;
-    submitted_at?: Date;
     history?: string;
+    id: number;
+    is_accepted?: boolean;
+    meter_id: number;
+    reason?: string;
+    source_system_id?: number;
+    submitted_at?: Date;
+    tolerance?: string;
+    type: "Closing" | "Meter Verification" | "Opening" | "Quarterly";
+    updated_at?: Date;
+    value: number;
 }>;
 
 /**
@@ -299,15 +299,15 @@ export type fixtures_meter_reads = Fixture<{
  * \`\`\`
  */
 export type installation_meters = Fixture<{
-    id: number;
-    meter_type: "Export" | "Generation";
-    meter_id: number;
-    installation_id: number;
-    start_on?: Date;
-    end_on?: Date;
     created_at?: Date;
-    updated_at?: Date;
+    end_on?: Date;
+    id: number;
+    installation_id: number;
+    meter_id: number;
+    meter_type: "Export" | "Generation";
     source_system_id?: number;
+    start_on?: Date;
+    updated_at?: Date;
 }>;
 
 /**
@@ -327,42 +327,42 @@ export type installation_meters = Fixture<{
  * \`\`\`
  */
 export type installations = Fixture<{
-    id: number;
-    name?: string;
-    type: "Retrofit" | "New build" | "Standalone" | "Extension of an existing FiT-accredited installation" | "None";
-    technology_type: "PV" | "H" | "W" | "AD" | "CHP";
-    property_type: "Domestic" | "Commercial" | "Farm" | "Industrial" | "Not for profit" | "School/Education" | "Other";
-    export_type?: "Deemed" | "Metered Export" | "Off Grid" | "PPA";
-    commissioned_on?: Date;
-    decommissioned_on?: Date;
-    installed_on: Date;
-    verified_on?: Date;
-    reverified_on?: Date;
-    inspected_on?: Date;
-    mcs_reference: string;
-    tic_reference: string;
-    dnc_reference: string;
-    roofit_reference?: string;
-    has_battery_storage?: boolean;
+    address_id: number;
     battery_installation_date_on?: Date;
+    commissioned_on?: Date;
     created_at?: Date;
-    updated_at?: Date;
-    export_mpan?: string;
-    source_system_id?: number;
-    name_of_grant?: string;
-    value_of_grant?: string;
-    eligibility_start_on?: Date;
-    eligibility_end_on?: Date;
     date_grant_repaid?: Date;
-    epc_rate?: string;
+    decommissioned_on?: Date;
+    dnc_reference: string;
+    eligibility_end_on?: Date;
+    eligibility_start_on?: Date;
     epc_date?: Date;
     epc_number?: number;
+    epc_rate?: string;
+    export_mpan?: string;
+    export_type?: "Deemed" | "Metered Export" | "Off Grid" | "PPA";
+    has_battery_storage?: boolean;
+    id: number;
+    inspected_on?: Date;
+    installed_on: Date;
     legacy_fit_db_id?: string;
+    mcs_reference: string;
+    name?: string;
+    name_of_grant?: string;
+    property_type: "Commercial" | "Domestic" | "Farm" | "Industrial" | "Not for profit" | "Other" | "School/Education";
+    reverified_on?: Date;
+    roofit_reference?: string;
+    source_system_id?: number;
     supply_mpan?: string;
     switched_from?: string;
-    switched_to?: string;
     switched_on?: Date;
-    address_id: number;
+    switched_to?: string;
+    technology_type: "AD" | "CHP" | "H" | "PV" | "W";
+    tic_reference: string;
+    type: "Extension of an existing FiT-accredited installation" | "New build" | "None" | "Retrofit" | "Standalone";
+    updated_at?: Date;
+    value_of_grant?: string;
+    verified_on?: Date;
 }>;
 
 /**
@@ -382,18 +382,18 @@ export type installations = Fixture<{
  * \`\`\`
  */
 export type issues = Fixture<{
-    id: number;
-    description: string;
-    due_date?: Date;
     account_id?: number;
     account_identifier?: string;
     comments?: string;
     created_at: Date;
-    type: "Read Tolerance" | "Account Levelisation" | "Installation" | "Payment" | "Meter" | "Account Pending";
-    state: "Open" | "In Progress" | "Closed" | "Blocked" | "Resolved" | "Unresolvable" | "Awaiting Answers";
-    reference_type: "Read" | "Account Levelisation" | "Account" | "Installation" | "Comm" | "Payment" | "Meter";
-    reference_id: number;
+    description: string;
+    due_date?: Date;
+    id: number;
     payload?: string;
+    reference_id: number;
+    reference_type: "Account" | "Account Levelisation" | "Comm" | "Installation" | "Meter" | "Payment" | "Read";
+    state: "Awaiting Answers" | "Blocked" | "Closed" | "In Progress" | "Open" | "Resolved" | "Unresolvable";
+    type: "Account Levelisation" | "Account Pending" | "Installation" | "Meter" | "Payment" | "Read Tolerance";
 }>;
 
 /**
@@ -413,10 +413,10 @@ export type issues = Fixture<{
  * \`\`\`
  */
 export type meter_reads = Fixture<{
+    date: Date;
     id: number;
     serial_number: string;
     value: string;
-    date: Date;
 }>;
 
 /**
@@ -436,18 +436,18 @@ export type meter_reads = Fixture<{
  * \`\`\`
  */
 export type meters = Fixture<{
+    created_at?: Date;
+    distribution_region?: string;
+    gsp?: string;
+    hh_metered: boolean;
     id: number;
-    mpan: string;
-    shared: boolean;
-    serial_number: string;
     make: string;
     model: string;
-    hh_metered: boolean;
-    gsp?: string;
-    distribution_region?: string;
-    created_at?: Date;
-    updated_at?: Date;
+    mpan: string;
+    serial_number: string;
+    shared: boolean;
     source_system_id?: number;
+    updated_at?: Date;
 }>;
 
 /**
@@ -489,14 +489,14 @@ export type pets = Fixture<{
  * \`\`\`
  */
 export type tariff_rates = Fixture<{
-    id: number;
-    tariff_id: number;
-    rate: string;
-    start_date_on: Date;
-    end_date_on?: Date;
     created_at?: Date;
-    updated_at?: Date;
+    end_date_on?: Date;
+    id: number;
+    rate: string;
     source_system_id?: number;
+    start_date_on: Date;
+    tariff_id: number;
+    updated_at?: Date;
 }>;
 
 /**
@@ -516,12 +516,12 @@ export type tariff_rates = Fixture<{
  * \`\`\`
  */
 export type tariffs = Fixture<{
-    id: number;
     code: string;
-    type: "Export" | "Generation" | "SEG";
     created_at?: Date;
-    updated_at?: Date;
+    id: number;
     source_system_id?: number;
+    type: "Export" | "Generation" | "SEG";
+    updated_at?: Date;
 }>;
 
 /**
@@ -541,8 +541,8 @@ export type tariffs = Fixture<{
  * \`\`\`
  */
 export type transactions = Fixture<{
-    id?: string;
     amount: number;
+    id?: string;
 }>;
 
 /**
@@ -562,9 +562,9 @@ export type transactions = Fixture<{
  * \`\`\`
  */
 export type users = Fixture<{
+    created_at?: Date;
     id: number;
     name: string;
-    created_at?: Date;
 }>;
 "
 `;
@@ -592,19 +592,19 @@ exports[`Cli Should generate fixtures file with suffix and title case 1`] = `
  * \`\`\`
  */
 export type AccountsFixture = Fixture<{
-    id: number;
-    customer_id: number;
-    state?: "Active" | "Pending" | "Dispute" | "Closed";
+    beneficiary_account_number?: string;
     beneficiary_name?: string;
     beneficiary_sort_code?: string;
-    beneficiary_account_number?: string;
+    created_at?: Date;
+    customer_id: number;
+    end_on?: Date;
+    id: number;
     payment_plan?: "BACs" | "Cheque" | "Internal Transfer";
     payment_suspended?: boolean;
-    created_at?: Date;
-    updated_at?: Date;
     source_system_id?: number;
     start_on?: Date;
-    end_on?: Date;
+    state?: "Active" | "Closed" | "Dispute" | "Pending";
+    updated_at?: Date;
 }>;
 
 /**
@@ -624,17 +624,17 @@ export type AccountsFixture = Fixture<{
  * \`\`\`
  */
 export type AddressesFixture = Fixture<{
-    id: number;
-    city?: string;
-    country: string;
-    postcode: string;
-    created_at?: Date;
-    updated_at?: Date;
-    county?: string;
     address_line_1?: string;
     address_line_2?: string;
     address_line_3?: string;
+    city?: string;
+    country: string;
+    county?: string;
+    created_at?: Date;
+    id: number;
+    postcode: string;
     source_system_id?: number;
+    updated_at?: Date;
 }>;
 
 /**
@@ -675,8 +675,8 @@ export type AnimalsFixture = Fixture<{
  * \`\`\`
  */
 export type CommsFixture = Fixture<{
-    id: number;
     comm_id: string;
+    id: number;
     status: string;
 }>;
 
@@ -697,16 +697,16 @@ export type CommsFixture = Fixture<{
  * \`\`\`
  */
 export type ContactsFixture = Fixture<{
-    id: number;
     address_id: number;
-    title?: "Mrs" | "Miss" | "Dr" | "Ms" | "Mr";
-    first_name: string;
-    last_name: string;
-    email?: string;
-    phone?: string;
     created_at?: Date;
-    updated_at?: Date;
+    email?: string;
+    first_name: string;
+    id: number;
+    last_name: string;
+    phone?: string;
     source_system_id?: number;
+    title?: "Dr" | "Miss" | "Mr" | "Mrs" | "Ms";
+    updated_at?: Date;
 }>;
 
 /**
@@ -726,21 +726,21 @@ export type ContactsFixture = Fixture<{
  * \`\`\`
  */
 export type ContractsFixture = Fixture<{
-    id: number;
-    scheme_type: "FIT" | "SEG";
-    scheme_account_reference: string;
-    confirmation_on?: Date;
-    terms_and_conditions_agreed: boolean;
-    created_at?: Date;
-    updated_at?: Date;
-    installation_id: number;
-    generation_tariff_id?: number;
-    export_tariff_id?: number;
-    source_system_id?: number;
-    export_percentage_split?: number;
-    generation_percentage_split?: number;
-    contact_id: number;
     account_id: number;
+    confirmation_on?: Date;
+    contact_id: number;
+    created_at?: Date;
+    export_percentage_split?: number;
+    export_tariff_id?: number;
+    generation_percentage_split?: number;
+    generation_tariff_id?: number;
+    id: number;
+    installation_id: number;
+    scheme_account_reference: string;
+    scheme_type: "FIT" | "SEG";
+    source_system_id?: number;
+    terms_and_conditions_agreed: boolean;
+    updated_at?: Date;
 }>;
 
 /**
@@ -760,20 +760,20 @@ export type ContractsFixture = Fixture<{
  * \`\`\`
  */
 export type CustomersFixture = Fixture<{
-    id: number;
+    billing_address_id?: number;
+    company_name?: string;
+    company_reg_number?: string;
+    company_vat_number?: string;
+    created_at?: Date;
     customer_reference: string;
+    generator_id?: string;
+    id: number;
     orion_account_number?: string;
     primary_contact_id?: number;
     secondary_contact_id?: number;
-    tertiary_contact_id?: number;
-    company_reg_number?: string;
-    company_name?: string;
-    company_vat_number?: string;
-    created_at?: Date;
-    updated_at?: Date;
-    billing_address_id?: number;
     source_system_id?: number;
-    generator_id?: string;
+    tertiary_contact_id?: number;
+    updated_at?: Date;
 }>;
 
 /**
@@ -835,20 +835,20 @@ export type DbUsers2Fixture = Fixture<{
  * \`\`\`
  */
 export type FixturesMeter_readsFixture = Fixture<{
-    id: number;
-    meter_id: number;
-    date_on: Date;
-    value: number;
-    type: "Opening" | "Closing" | "Quarterly" | "Meter Verification";
-    reason?: string;
     created_at?: Date;
-    updated_at?: Date;
-    source_system_id?: number;
-    tolerance?: string;
-    is_accepted?: boolean;
+    date_on: Date;
     deleted_at?: Date;
-    submitted_at?: Date;
     history?: string;
+    id: number;
+    is_accepted?: boolean;
+    meter_id: number;
+    reason?: string;
+    source_system_id?: number;
+    submitted_at?: Date;
+    tolerance?: string;
+    type: "Closing" | "Meter Verification" | "Opening" | "Quarterly";
+    updated_at?: Date;
+    value: number;
 }>;
 
 /**
@@ -868,15 +868,15 @@ export type FixturesMeter_readsFixture = Fixture<{
  * \`\`\`
  */
 export type InstallationMetersFixture = Fixture<{
-    id: number;
-    meter_type: "Export" | "Generation";
-    meter_id: number;
-    installation_id: number;
-    start_on?: Date;
-    end_on?: Date;
     created_at?: Date;
-    updated_at?: Date;
+    end_on?: Date;
+    id: number;
+    installation_id: number;
+    meter_id: number;
+    meter_type: "Export" | "Generation";
     source_system_id?: number;
+    start_on?: Date;
+    updated_at?: Date;
 }>;
 
 /**
@@ -896,42 +896,42 @@ export type InstallationMetersFixture = Fixture<{
  * \`\`\`
  */
 export type InstallationsFixture = Fixture<{
-    id: number;
-    name?: string;
-    type: "Retrofit" | "New build" | "Standalone" | "Extension of an existing FiT-accredited installation" | "None";
-    technology_type: "PV" | "H" | "W" | "AD" | "CHP";
-    property_type: "Domestic" | "Commercial" | "Farm" | "Industrial" | "Not for profit" | "School/Education" | "Other";
-    export_type?: "Deemed" | "Metered Export" | "Off Grid" | "PPA";
-    commissioned_on?: Date;
-    decommissioned_on?: Date;
-    installed_on: Date;
-    verified_on?: Date;
-    reverified_on?: Date;
-    inspected_on?: Date;
-    mcs_reference: string;
-    tic_reference: string;
-    dnc_reference: string;
-    roofit_reference?: string;
-    has_battery_storage?: boolean;
+    address_id: number;
     battery_installation_date_on?: Date;
+    commissioned_on?: Date;
     created_at?: Date;
-    updated_at?: Date;
-    export_mpan?: string;
-    source_system_id?: number;
-    name_of_grant?: string;
-    value_of_grant?: string;
-    eligibility_start_on?: Date;
-    eligibility_end_on?: Date;
     date_grant_repaid?: Date;
-    epc_rate?: string;
+    decommissioned_on?: Date;
+    dnc_reference: string;
+    eligibility_end_on?: Date;
+    eligibility_start_on?: Date;
     epc_date?: Date;
     epc_number?: number;
+    epc_rate?: string;
+    export_mpan?: string;
+    export_type?: "Deemed" | "Metered Export" | "Off Grid" | "PPA";
+    has_battery_storage?: boolean;
+    id: number;
+    inspected_on?: Date;
+    installed_on: Date;
     legacy_fit_db_id?: string;
+    mcs_reference: string;
+    name?: string;
+    name_of_grant?: string;
+    property_type: "Commercial" | "Domestic" | "Farm" | "Industrial" | "Not for profit" | "Other" | "School/Education";
+    reverified_on?: Date;
+    roofit_reference?: string;
+    source_system_id?: number;
     supply_mpan?: string;
     switched_from?: string;
-    switched_to?: string;
     switched_on?: Date;
-    address_id: number;
+    switched_to?: string;
+    technology_type: "AD" | "CHP" | "H" | "PV" | "W";
+    tic_reference: string;
+    type: "Extension of an existing FiT-accredited installation" | "New build" | "None" | "Retrofit" | "Standalone";
+    updated_at?: Date;
+    value_of_grant?: string;
+    verified_on?: Date;
 }>;
 
 /**
@@ -951,18 +951,18 @@ export type InstallationsFixture = Fixture<{
  * \`\`\`
  */
 export type IssuesFixture = Fixture<{
-    id: number;
-    description: string;
-    due_date?: Date;
     account_id?: number;
     account_identifier?: string;
     comments?: string;
     created_at: Date;
-    type: "Read Tolerance" | "Account Levelisation" | "Installation" | "Payment" | "Meter" | "Account Pending";
-    state: "Open" | "In Progress" | "Closed" | "Blocked" | "Resolved" | "Unresolvable" | "Awaiting Answers";
-    reference_type: "Read" | "Account Levelisation" | "Account" | "Installation" | "Comm" | "Payment" | "Meter";
-    reference_id: number;
+    description: string;
+    due_date?: Date;
+    id: number;
     payload?: string;
+    reference_id: number;
+    reference_type: "Account" | "Account Levelisation" | "Comm" | "Installation" | "Meter" | "Payment" | "Read";
+    state: "Awaiting Answers" | "Blocked" | "Closed" | "In Progress" | "Open" | "Resolved" | "Unresolvable";
+    type: "Account Levelisation" | "Account Pending" | "Installation" | "Meter" | "Payment" | "Read Tolerance";
 }>;
 
 /**
@@ -982,10 +982,10 @@ export type IssuesFixture = Fixture<{
  * \`\`\`
  */
 export type MeterReadsFixture = Fixture<{
+    date: Date;
     id: number;
     serial_number: string;
     value: string;
-    date: Date;
 }>;
 
 /**
@@ -1005,18 +1005,18 @@ export type MeterReadsFixture = Fixture<{
  * \`\`\`
  */
 export type MetersFixture = Fixture<{
+    created_at?: Date;
+    distribution_region?: string;
+    gsp?: string;
+    hh_metered: boolean;
     id: number;
-    mpan: string;
-    shared: boolean;
-    serial_number: string;
     make: string;
     model: string;
-    hh_metered: boolean;
-    gsp?: string;
-    distribution_region?: string;
-    created_at?: Date;
-    updated_at?: Date;
+    mpan: string;
+    serial_number: string;
+    shared: boolean;
     source_system_id?: number;
+    updated_at?: Date;
 }>;
 
 /**
@@ -1058,14 +1058,14 @@ export type PetsFixture = Fixture<{
  * \`\`\`
  */
 export type TariffRatesFixture = Fixture<{
-    id: number;
-    tariff_id: number;
-    rate: string;
-    start_date_on: Date;
-    end_date_on?: Date;
     created_at?: Date;
-    updated_at?: Date;
+    end_date_on?: Date;
+    id: number;
+    rate: string;
     source_system_id?: number;
+    start_date_on: Date;
+    tariff_id: number;
+    updated_at?: Date;
 }>;
 
 /**
@@ -1085,12 +1085,12 @@ export type TariffRatesFixture = Fixture<{
  * \`\`\`
  */
 export type TariffsFixture = Fixture<{
-    id: number;
     code: string;
-    type: "Export" | "Generation" | "SEG";
     created_at?: Date;
-    updated_at?: Date;
+    id: number;
     source_system_id?: number;
+    type: "Export" | "Generation" | "SEG";
+    updated_at?: Date;
 }>;
 
 /**
@@ -1110,8 +1110,8 @@ export type TariffsFixture = Fixture<{
  * \`\`\`
  */
 export type TransactionsFixture = Fixture<{
-    id?: string;
     amount: number;
+    id?: string;
 }>;
 
 /**
@@ -1131,9 +1131,9 @@ export type TransactionsFixture = Fixture<{
  * \`\`\`
  */
 export type UsersFixture = Fixture<{
+    created_at?: Date;
     id: number;
     name: string;
-    created_at?: Date;
 }>;
 "
 `;

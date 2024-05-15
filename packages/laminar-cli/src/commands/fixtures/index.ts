@@ -67,6 +67,13 @@ export const fixturesCommand = (logger: Logger = console): Command =>
           client.query<Enum>(enumsSql),
         ]);
 
+        const sortedEnums = enums.map((enObj) => ({
+          name: enObj.name,
+          enum: Array.from(new Set(enObj.enum)).sort((a, b) =>
+            a.toLocaleLowerCase().localeCompare(b.toLocaleLowerCase(), 'en'),
+          ),
+        }));
+
         const tables = columns.reduce<Record<string, Table>>(
           (current, column) => ({
             ...current,
@@ -81,7 +88,7 @@ export const fixturesCommand = (logger: Logger = console): Command =>
                     (column.columnDefault !== null && !column.columnDefault.match(/nextval\('(.*)_seq'::regclass\)/)),
                   type: column.dataType === 'USER-DEFINED' ? column.recordName : column.dataType,
                 },
-              ],
+              ].sort((colA, colB) => colA.name.localeCompare(colB.name, 'en')),
             },
           }),
           {},
@@ -89,7 +96,7 @@ export const fixturesCommand = (logger: Logger = console): Command =>
 
         const result = toTypeScript({
           tables: Object.values(tables).filter((item) => !table?.length || table.includes(item.name)),
-          enums,
+          enums: sortedEnums,
           suffix,
           titleCase,
         });
