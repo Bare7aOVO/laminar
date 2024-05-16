@@ -41,7 +41,9 @@ const entitiesWithContext = (initialContext: Context, fixtures: Fixture[]): Cont
 
     const initColumns: { columns: EntityColumns; context: Context } = { columns: {}, context: idContext };
 
-    const sortedFixtureColumns = Object.fromEntries(Object.entries(fixture.columns).sort(([nameA], [nameB]) => nameA.localeCompare(nameB, 'en')))
+    const sortedFixtureColumns = Object.fromEntries(
+      Object.entries(fixture.columns).sort(([nameA], [nameB]) => nameA.localeCompare(nameB, 'en')),
+    );
 
     const { columns, context: entityContext } = Object.entries(sortedFixtureColumns).reduce(
       ({ columns, context }, [name, column]) => {
